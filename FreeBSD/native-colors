@@ -1,0 +1,193 @@
+# ~/.colors v0.99 for FreeBSD tcsh - [c]2012 Michael S. Sanders
+
+# SYNOPSIS:  an enhancement  of  the tcsh  builtin  'LS_COLORS' providing  a
+# method of  organizing/externalizing file  colors. The  strategy is  to use
+# only native FreeBSD components (no 3rd party pkgs or ports).
+
+# REQUIREMENTS: tcsh, awk, & your favorite editor
+
+# UPDATES (if any): http://topcat.hypermart.net/index.html
+
+# LEGALESE:  Permission is  hereby granted,  free of  charge, to  any person
+# obtaining a copy of this  software and associated documentation files (the
+# "Software"),  to  deal  in  the Software  without  restriction,  including
+# without  limitation  the rights  to  use,  copy, modify,  merge,  publish,
+# distribute, sublicense, and/or sell copies  of the Software, and to permit
+# persons  to whom  the  Software is  furnished  to do  so,  subject to  the
+# following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT  NOT LIMITED TO THE  WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR  A PARTICULAR PURPOSE  AND NONINFRINGEMENT. IN NO  EVENT SHALL
+# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER  IN AN ACTION  OF CONTRACT, TORT OR  OTHERWISE, ARISING
+# FROM,  OUT OF  OR IN  CONNECTION WITH  THE SOFTWARE  OR THE  USE OR  OTHER
+# DEALINGS IN THE SOFTWARE.
+
+# SETUP (3 steps):
+#
+# 1. save this file in your home directory as '.colors'
+#
+# 2. add the following construct to ~/.tcshrc, or ~/.cshrc (excluding '#')
+#
+# if (-f ~/.colors) then
+#    alias ls 'ls-F'
+#    set listflags='ha'
+#    set color
+#    setenv LS_COLORS `awk '! /^#|^$|\t/ {printf $1"="$2":"}' ~/.colors`
+# endif
+#
+# 3. (re)source your ~/.tcshrc by invoking 'source ~/.tcshrc'
+
+# SYNTAX: <*.ext><space>[<intensity<;>]<foreground>[<;><background>]
+#
+# note: square brackets above indicate items are optional
+#
+# examples...
+#
+# *.mp3       31 # normal red
+# *.png     1;32 # bold green
+# *.doc     4;33 # underlined yellow
+# *.man     5;34 # flashing blue
+# *.c      30;46 # black foreground/cyan background
+# *.xyz 05;31;43 # flashing red foreground/yellow background
+#
+# ISO 6429 color table
+#
+# color    intensity     foreground   background
+# ----------------------------------------------
+# black  | 0 normal    | 30         | 40
+# red    | 1 bold      | 31         | 41
+# green  | 4 underline | 32         | 42
+# yellow | 5 flashing  | 33         | 43
+# blue   |             | 34         | 44
+# purple |             | 35         | 45
+# cyan   |             | 36         | 46
+# white  |             | 37         | 47
+# ----------------------------------------------
+
+# COLORS: add/remove/season to taste
+
+# media (red)
+
+*.avi        31
+*.bmp        31
+*.flc        31
+*.fli        31
+*.flv        31
+*.gif        31
+*.jpeg       31
+*.jpg        31
+*.mid        31
+*.mov        31
+*.mp3        31
+*.mpeg       31
+*.mpg        31
+*.nes        31
+*.pls        31
+*.png        31
+*.swf        31
+*.wav        31
+*.xbm        31
+*.xpm        31
+
+# archive (yellow/brown)
+
+*.bz2        33
+*.gz         33
+*.img        33
+*.iso        33
+*.jar        33
+*.tar        33
+*.tar.gz     33
+*.tar.xz     33
+*.tbz        33
+*.tgz        33
+*.xz         33
+*.zip        33
+
+# docs (purple)
+
+*.1          35
+*.asc        35
+*.csv        35
+*.doc        35
+*.htm        35
+*.html       35
+*.info       35
+*.log        35
+*.man        35
+*.nfo        35
+*.pdf        35
+*.pod        35
+*.ps         35
+*.sig        35
+*.tex        35
+*.txt        35
+
+# rc/dot files (cyan)
+
+*.cshrc      36
+*.exrc       36
+*.history    36
+*.inputrc    36
+*.login      36
+*.logout     36
+*.mailrc     36
+*.muttrc     36
+*.nano       36
+*.netrc      36
+*.newsrc     36
+*.pid        36
+*.profile    36
+*.shrc       36
+*.tcshrc     36
+*.xinitrc    36
+
+# source (gray)
+
+*.4th      1;30
+*.asm      1;30
+*.awk      1;30
+*.c        1;30
+*.cpp      1;30
+*.css      1;30
+*.diff     1;30
+*.git      1;30
+*.h        1;30
+*.js       1;30
+*.lex      1;30
+*.lisp     1;30
+*.lua      1;30
+*.patch    1;30
+*.php      1;30
+*.pl       1;30
+*.py       1;30
+*.rb       1;30
+*.sed      1;30
+*.sh       1;30
+*.sql      1;30
+*.tcl      1;30
+*.xml      1;30
+*.yak      1;30
+Makefile   1;30
+
+# file attributes (these *always* overide other colors)
+
+no            0 # normal (non-filename) text
+fi            0 # regular file
+di           34 # directory
+ln         1;35 # symbolic link
+pi           33 # named pipe (fifo)
+so         1;35 # socket
+do         1;35 # door
+bd         1;33 # block device
+cd         1;32 # character device
+ex         1;32 # executable file
+mi              # (none) missing file (defaults to fi)
+or              # (none) orphaned symbolic link (defaults to ln)
+
+# eof
